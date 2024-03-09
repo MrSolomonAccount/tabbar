@@ -22,6 +22,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   late TabController tabController;
   int tabIndex=0;
+overflowContent(){
+  return Column(children: [
+    for(int i=0; i<100; i++)Text("Content $i")
+    ]);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -34,29 +40,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      
       body: 
       CustomScrollView(
         slivers: [
           SliverAppBar(
+            flexibleSpace: Container(color: Colors.blue,),
             expandedHeight: 200,
             backgroundColor: Colors.blue,
             bottom:TabBar(
          
               controller: tabController,
               indicatorColor: Colors.red,
-              tabs: const [Text("Tab 1"), Text("Tab 2"), Text("Tab 3")]),
+              tabs: const [Tab(text:"Tab 1"), Tab(text:"Tab 2"), Tab(text:"Tab 3")]),
           ),
 
 
 
-/*SliverList.builder(
-  itemCount: switch(tabController.index){
-    0=>2,
-    1=>3,
-    _=>50
-  },
-  itemBuilder: (context, index)=> const ListTile(title: Text("mango"),))
-*/
 
    SliverFillRemaining(
       child:TabBarView(
@@ -69,12 +69,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
           itemCount:3 ,
           itemBuilder: (_, index)=>ListTile(title: Text("Content $index"),)),
 
-       ListView.builder(
-      physics: const FixedExtentScrollPhysics(),       
+Wrap(children: [overflowContent()],)
+  /*ListView.builder(
+      physics: null,  
           itemCount:50 ,
           itemBuilder: (_, index)=>ListTile(title: Text("Content $index"),))
-      
-     
+    */
         ]),
     )
        

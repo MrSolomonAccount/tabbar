@@ -34,10 +34,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return  NestedScrollView(
+      physics: scrollOrNot(numOfChildren: childCount[tabController.index]),
 headerSliverBuilder:(context, innerBoxIsScrolled)=>[
  SliverAppBar(
   expandedHeight: 300,
   floating: true,
+  backgroundColor: Colors.blue,
   bottom: TabBar(
     onTap: (value){
      setState(() {
